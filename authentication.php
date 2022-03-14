@@ -1,5 +1,5 @@
 <?php      
-   $host = "127.0.0.1:3306";  
+   $host = "127.0.0.1:3308";  
    $user = "comp440";  
    $password = "pass1234";  
    $db_name = "comp440proj1";  
@@ -26,6 +26,9 @@
             echo "<h1><center> Login successful </center></h1>";  
         }  
         else{  
-            echo '<script>alert("Welcome to Geeks for Geeks")</script>';  
+            echo ("<script LANGUAGE='JavaScript'>
+            window.alert('wrong info');
+            window.location.href='http://localhost/comp440-project/';
+            </script>");  
         }     
 ?> 

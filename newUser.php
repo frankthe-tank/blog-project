@@ -40,7 +40,7 @@
         <?php
             if(isset($_POST['create'])){
                  
-                $host = "127.0.0.1:3306";  
+                $host = "127.0.0.1:3308";  
                 $user = "comp440";  
                 $password = "pass1234";  
                 $db_name = "comp440proj1";  
@@ -73,7 +73,7 @@
                     if ($con->query($sql) === TRUE) {
                         echo ("<script LANGUAGE='JavaScript'>
                          window.alert('User Created!');
-                        window.location.href='http://127.0.0.1:8080/440%20project/professor%20didnt%20use/';
+                        window.location.href='http://localhost/comp440-project';
                         </script>");
                       } 
                       else {
