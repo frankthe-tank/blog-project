@@ -41,9 +41,9 @@
             if(isset($_POST['create'])){
                  
                 $host = "127.0.0.1:3308";  
-                $user = "comp440";  
-                $password = "pass1234";  
-                $db_name = "comp440proj1";  
+                $user = "user";  
+                $password = "pass";  
+                $db_name = "comp440project";  
      
                 $con = mysqli_connect($host, $user, $password, $db_name);  
                 if(mysqli_connect_errno()) {  
@@ -73,12 +73,17 @@
                     if ($con->query($sql) === TRUE) {
                         echo ("<script LANGUAGE='JavaScript'>
                          window.alert('User Created!');
-                        window.location.href='http://localhost/comp440-project';
+                        window.location.href='http://127.0.0.1:8080/440%20project/professor%20didnt%20use/index.php';
                         </script>");
                       } 
                       else {
                         echo "Error: " . $sql . "<br>" . $con->error;
                       }
+                }
+                else{
+                    echo ("<script LANGUAGE='JavaScript'>
+                         window.alert('User or email taken!');
+                        </script>");
                 }
             }
 

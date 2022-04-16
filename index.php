@@ -3,7 +3,11 @@
 <head>  
     <title>PHP login system</title>  
      <!--insert style.css file inside index.html-->  
-    <link rel = "stylesheet" type = "text/css" href = "style.css">   
+    <link rel = "stylesheet" type = "text/css" href = "style.css"> 
+    <?php
+        session_start();
+        session_destroy();
+    ?>  
 </head>  
 <body>  
     <div id = "frm">  

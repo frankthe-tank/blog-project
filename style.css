@@ -1,8 +1,22 @@
+html{
+	background: #274472; /* Beccapurple */
+  margin: 0;
+  padding:0;
+  box-sizing:border-box;
+}
+* {
+  box-sizing: border-box;
+}
+.navhead{
+    background: #3D77E3;
+    color: #000000;
+    text-decoration: none;
+  }
 body{   
-    background: #eee;  
+    background: rgb(221, 68, 68);  
 }  
 #frm{  
-    border: solid gray 1px;  
+    border: solid rgb(235, 14, 14) 1px;  
     width:25%;  
     border-radius: 2px;  
     margin: 120px auto;  
@@ -15,3 +29,38 @@ body{
     padding: 7px;  
     margin-left: 70%;  
 } 
+.display {
+    text-align: center;
+     font-family: "Roboto mono", serif;
+    overflow: hidden;
+    /* To reduce the space between the elements set the font size to zero in the parent element. */
+    position: fixed;
+     font-size: 0; 
+    top:0;
+    left:0;
+    width:100%;
+    
+  }
+  .display a {
+    padding: 15px;
+    display: inline-block;
+    
+    /* This extra space affects how much total space the element takes up. Let's say I want to make four equal elements, by setting the links to a width of 25%. Even though 25 x 4 = 100%, the last item gets pushed down to the next line because there's not enough space for it. */  
+    
+     width: 20%; 
+    
+    
+    
+    /* Because font size is also inherited, you'll have to reset the font size in the child element itself. */
+    
+     font-size: 16px; 
+  }
+  .bigInput{
+   
+    height:50px;
+  }
+  .card {
+    background-color: rgb(69, 76, 175);
+    padding: 20px;
+    margin-top: 20px;
+ }
