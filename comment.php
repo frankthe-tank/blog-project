@@ -11,11 +11,14 @@
             
             $comment=$_POST['comments'];
             $rating=$_POST['rating'];
-            $blog=$_POST['blogId'];
+            $blog_tmp=$_POST['blogId'];
             $date=date("m-d-y");
             $commentnum=0;
             $postedonblog=0;
             $ownblog=0;
+
+            $blog_tmp = stripslashes($blog_tmp);
+            $blog = intval($blog_tmp);
 
             $sqlcomment="INSERT INTO comment (commentID, username, description, sentiment, c_date, blogID)
             VALUES (DEFAULT, '$username','$comment','$rating','$date',(SELECT blogID from blog
@@ -44,11 +47,18 @@
                 $ownblog=0;
 
             if($commentnum<3 && $postedonblog==0 && $ownblog==0){
-            $query=mysqli_query($con,$sqlcomment);
-            echo ("<script LANGUAGE='JavaScript'>
-            window.alert('Comment added!');
-           window.location.href='loggedin.php';
-           </script>");
+                if($commentnum<3 && $postedonblog==0 && $ownblog==0){
+                    if ($con->query($sqlcomment) === TRUE){
+                        #$query=mysqli_query($con,$sqlcomment);
+                        echo ("<script LANGUAGE='JavaScript'>
+                        window.alert('Comment added!');
+                        window.location.href='loggedin.php';
+                        </script>");
+                    }else {
+                        echo "".$blog." Error: " . $sqlcomment . "<br>" . $con->error;
+                    }
+                
+                }
             }
             elseif($commentnum>3){
                 echo ("<script LANGUAGE='JavaScript'>
