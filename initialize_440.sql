@@ -1,4 +1,6 @@
 DROP TABLE IF EXISTS `tag`;
+DROP TABLE IF EXISTS `follow`;
+DROP TABLE IF EXISTS `hobby`;
 DROP TABLE IF EXISTS `comment`;
 DROP TABLE IF EXISTS `blog`;
 DROP TABLE IF EXISTS `user`;
@@ -48,6 +50,23 @@ CREATE TABLE `comment` (
   CONSTRAINT `comment_username` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE `follow` (
+  `username` varchar(45) NOT NULL,
+  `following` varchar(45) NOT NULL,
+  KEY `follow_username_following_idx` (`following`),
+  KEY `follow_username_idx` (`username`),
+  CONSTRAINT `follow_username` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `follow_username_following` FOREIGN KEY (`following`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE `hobby` (
+  `username` varchar(45) NOT NULL,
+  `hobby` varchar(45) NOT NULL,
+  KEY `hobbie_username_idx` (`username`),
+  CONSTRAINT `hobby_username` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
+);
+
+
 
 INSERT INTO `user` (`username`, `password`, `firstName`, `lastName`, `email`) VALUES ('justaway', 'comp440', 'steven', 'condor', 'steven@gmail.com');
 INSERT INTO `user` (`username`, `password`, `firstName`, `lastName`, `email`) VALUES ('horse', 'comp440', 'frank', 'ceja', 'frank@gmail.com');
@@ -73,3 +92,15 @@ INSERT INTO `tag` (`blogID`, `tag`) VALUES ('2', 'hello');
 INSERT INTO `tag` (`blogID`, `tag`) VALUES ('3', 'justaway');
 INSERT INTO `tag` (`blogID`, `tag`) VALUES ('4', 'gorilla');
 INSERT INTO `tag` (`blogID`, `tag`) VALUES ('5', 'getmeout');
+
+INSERT INTO `follow` (`username`, `following`) VALUES ('justaway', 'sasuke69');
+INSERT INTO `follow` (`username`, `following`) VALUES ('sasuke69', 'justaway');
+INSERT INTO `follow` (`username`, `following`) VALUES ('horse', 'sasuke69');
+INSERT INTO `follow` (`username`, `following`) VALUES ('fruits_chinpo_samurai', 'sasuke69');
+INSERT INTO `follow` (`username`, `following`) VALUES ('justaway', 'thejtcooper');
+
+INSERT INTO `hobby` (`username`, `hobby`) VALUES ('justaway', 'eating');
+INSERT INTO `hobby` (`username`, `hobby`) VALUES ('sasuke69', 'eating');
+INSERT INTO `hobby` (`username`, `hobby`) VALUES ('sasuke69', 'cooking');
+INSERT INTO `hobby` (`username`, `hobby`) VALUES ('fruits_chinpo_samurai', 'stalking');
+INSERT INTO `hobby` (`username`, `hobby`) VALUES ('thejtcooper', 'reading');
