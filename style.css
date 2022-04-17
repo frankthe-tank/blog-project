@@ -64,3 +64,9 @@ body{
     padding: 20px;
     margin-top: 20px;
  }
+ .Comment-header{
+   background-color: rgb(233, 207, 207);
+}
+.comment{
+  background-color: rgb(158, 175, 211);
+}

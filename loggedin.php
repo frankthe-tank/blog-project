@@ -59,12 +59,12 @@
                 echo($tagrow['tag'].",");
             }  
             if($totalcom>=1){  
-            echo("<h3>Comments</h3>");
+            echo("<h3 class='comment-header' style='text-align:center;'>Comments</h3>");
             while($comrow=mysqli_fetch_assoc($commresult)){
-                echo("<div><h5>From user: ".$comrow['username']."</h5>
+                echo("<div class='comment'><h5>From user: ".$comrow['username']."</h5>
                 <h5>Date: ".$comrow['c_date']."     Response: ".$comrow['sentiment']."</h5>
                 <p>description: ".$comrow['description']."</p>
-                </div>");
+                </div><br>");
             }
         }
            echo("</p><form action=comment.php method = 'POST'>
