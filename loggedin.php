@@ -7,7 +7,7 @@
             <a href="loggedin.php" class="navhead">Home</a>
             <a href="newPost.php" class="navhead">Make A Post!</a>
             <a href="functions.php" class="navhead">Part 3</a>
-            <a href="http://127.0.0.1:8080/440%20project/professor%20didnt%20use/index.php" class="navhead">Logout</a>
+            <a href="index.php" class="navhead">Logout</a>
         </nav>   
     </head> 
     <body>

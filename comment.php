@@ -39,19 +39,19 @@
             $query=mysqli_query($con,$sqlcomment);
             echo ("<script LANGUAGE='JavaScript'>
             window.alert('Comment added!');
-           window.location.href='http://127.0.0.1:8080/440%20project/professor%20didnt%20use/loggedin.php';
+           window.location.href='loggedin.php';
            </script>");
             }
             elseif($commentnum>3){
                 echo ("<script LANGUAGE='JavaScript'>
             window.alert('You posted your max comments for the day!');
-           window.location.href='http://127.0.0.1:8080/440%20project/professor%20didnt%20use/loggedin.php';
+           window.location.href='loggedin.php';
            </script>");
             }
             elseif($postedonblog==1){
                 echo ("<script LANGUAGE='JavaScript'>
             window.alert('Max Comments on blog!');
-           window.location.href='http://127.0.0.1:8080/440%20project/professor%20didnt%20use/loggedin.php';
+           window.location.href='loggedin.php';
            </script>");
             }
 

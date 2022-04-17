@@ -73,7 +73,7 @@
                     if ($con->query($sql) === TRUE) {
                         echo ("<script LANGUAGE='JavaScript'>
                          window.alert('User Created!');
-                        window.location.href='http://127.0.0.1:8080/440%20project/professor%20didnt%20use/index.php';
+                        window.location.href='index.php';
                         </script>");
                       } 
                       else {

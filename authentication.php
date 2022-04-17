@@ -27,13 +27,13 @@
         if($count == 1){  
             echo "<h1><center> Welcome " .$username." </center></h1>";  
             
-            header('Location: http://127.0.0.1:8080/440%20project/professor%20didnt%20use/loggedin.php',true,301);
+            header('Location: loggedin.php',true,301);
             exit();
         }  
         else{             
             echo ("<script LANGUAGE='JavaScript'>
             window.alert('wrong info');
-            window.location.href='http://127.0.0.1:8080/440%20project/professor%20didnt%20use/index.php';
+            window.location.href='index.php';
             </script>");   
         }     
 ?> 
