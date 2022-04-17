@@ -31,6 +31,11 @@
         <input type="submit" id="btn" value="New user?" />
     </form>
     </div>
+    <div id = "frm">
+        <form action="init.php">
+            <input type="submit" id="btn" value="Initialize Database" />
+        </form>
+    </div>
     <!-- validation for empty field -->  
     <script>  
             function validation()  
