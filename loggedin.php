@@ -70,7 +70,7 @@
            echo("</p><form action=comment.php method = 'POST'>
                     <label for='comment'>Comment:</label><br>
                     <input type='text'  name='comments' ><br>
-                    <label for='Rating'>Select a rating for the blog.</label>
+                    <label for='Rating'>Select a rating for the blog.".$row['blogID']."</label>
                         <select  name='rating'>
                             <option value='Positive'>Positive</option>
                             <option value='Negative'>Negative</option>
