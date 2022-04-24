@@ -41,21 +41,20 @@
                     die("Failed to connect with MySQL: ". mysqli_connect_error());  
                 } 
 
-                $sql="SELECT
-                cus.username AS current_username
-                ,ous.username AS other_username
-                ,cus.hobby AS same_hobby
-              FROM
-                hobby AS ous -- other users' skills
-                JOIN hobby AS cus -- current user's skills
-                  ON cus.hobby = ous.hobby -- we are looking for users that have some of the current user's skills
-                    AND cus.username <> ous.username -- exclude the current user from the list
-              GROUP BY
-                cus.username
-                ,ous.username
-              ORDER BY
-                cus.username
-                ,same_hobby DESC";
+                $sql="select p1.username as person1, p2.username as person2, p1.hobbies as hobby
+                from
+                (
+                  select username, group_concat(hobby order by hobby) as hobbies
+                  from hobby
+                  group by username
+                ) p1
+                join
+                (
+                  select username, group_concat(hobby order by hobby) as hobbies
+                  from hobby
+                  group by username
+                ) p2 on p2.username > p1.username and p2.hobbies = p1.hobbies
+                order by person1, person2;";
                 $result = mysqli_query($con, $sql);
                 echo "<table style='width:100%'>
                 <tr>
@@ -66,9 +65,9 @@
                 while($row = mysqli_fetch_array($result))
                 {
                     echo "<tr>";
-                    echo "<td>" . $row['current_username'] . "</td>";
-                    echo "<td>" . $row['other_username'] . "</td>";
-                    echo "<td>" . $row['same_hobby'] . "</td>";
+                    echo "<td>" . $row['person1'] . "</td>";
+                    echo "<td>" . $row['person2'] . "</td>";
+                    echo "<td>" . $row['hobby'] . "</td>";
                     echo "</tr>";
                 }
                 echo "</table>";
