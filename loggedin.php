@@ -35,8 +35,11 @@
         echo "<br>";
         echo "<table border='1'>";
         while ($row = mysqli_fetch_assoc($result)) { 
-            $sqltag="SELECT * FROM tag WHERE ".$row['blogID']." = blogID";
-            $tagresult=mysqli_query($con,$sqltag);
+            $sqlTagBlog="SELECT tag FROM tag WHERE tagID in 
+            (SELECT tagID from tag_blog WHERE ".$row['blogID']." = blogID)";
+            $tagresult=mysqli_query($con,$sqlTagBlog);
+            $tagrownum=mysqli_num_rows($tagresult);
+            $tagcounter=1;
             //getting comments
             $sqlcomnum="SELECT COUNT(*) FROM comment WHERE".$row['blogID']."= blogID";
             $sqlcomm="SELECT * FROM comment WHERE ".$row['blogID']."= blogID";
@@ -54,9 +57,13 @@
                 <h3>By User: ".$row['username']."</h3>
                 <h5>Created on: ".$row['p_date']."</h5>
                 <p>".$row['description']."</p><p><b>TAGS: </b>");
-
+            
             while($tagrow=mysqli_fetch_assoc($tagresult)){
-                echo($tagrow['tag'].",");
+                if($tagcounter!=$tagrownum)
+                    echo($tagrow['tag'].", ");
+                else
+                    echo($tagrow['tag']);
+                $tagcounter++;
             }  
             if($totalcom>=1){  
             echo("<h3 class='comment-header' style='text-align:center;'>Comments</h3>");
@@ -70,7 +77,7 @@
            echo("</p><form action=comment.php method = 'POST'>
                     <label for='comment'>Comment:</label><br>
                     <input type='text'  name='comments' ><br>
-                    <label for='Rating'>Select a rating for the blog.".$row['blogID']."</label>
+                    <label for='Rating'>Select a rating for the blog. </label>
                         <select  name='rating'>
                             <option value='Positive'>Positive</option>
                             <option value='Negative'>Negative</option>

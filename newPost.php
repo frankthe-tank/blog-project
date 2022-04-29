@@ -97,10 +97,32 @@
                     if ($con->query($sql) === TRUE) {
                         
                         for($x=0;$x<$totaltag;$x++){
+                            $tagCheck="SELECT tagID FROM tag WHERE tag= '".$splitted[$x]."'";
+                            $tagresult=mysqli_query($con,$tagCheck);
+                            $tagRowNum=mysqli_num_rows($tagresult);
+                            if($tagRowNum==0){
+                                $sqlTagTable="INSERT INTO tag (tagID, tag)
+                                VALUES(DEFAULT, '".$splitted[$x]."')";
+                                $tagTableRes=$con->query($sqlTagTable);
+                                $sqlTagBlog="INSERT INTO tag_blog (blogID, tagID)
+                                VALUES((SELECT blogID from blog
+                                where username='$username' AND subject='$subject'),
+                                (SELECT tagID FROM tag WHERE tag='".$splitted[$x]."'))";
+                                $tagBlogRes=$con->query($sqlTagBlog);
+                            }
+                            else{
+                                $sqlTagBlog="INSERT INTO tag_blog(blogID, tagID)
+                                VALUES((SELECT blogID from blog
+                                where username='$username' AND subject='$subject'),
+                                (SELECT tagID FROM tag WHERE tag='".$splitted[$x]."'))";
+                                $tagBlogRes=$con->query($sqlTagBlog);
+                            }
+                        /*
                         $query="INSERT INTO tag (blogID, tag)
                         VALUES((SELECT blogID from blog
                         where username='$username' AND subject='$subject'),'".$splitted[$x]."')";
                         $result=$con->query($query);
+                        */
                         }
 
 

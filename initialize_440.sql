@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `tag_blog`;
 DROP TABLE IF EXISTS `tag`;
 DROP TABLE IF EXISTS `follow`;
 DROP TABLE IF EXISTS `hobby`;
@@ -28,11 +29,21 @@ CREATE TABLE `blog` (
   CONSTRAINT `blog_username` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+
 CREATE TABLE `tag` (
-  `blogID` int NOT NULL,
+  `tagID` int NOT NULL AUTO_INCREMENT,
   `tag` varchar(45) NOT NULL,
-  KEY `tag_blogID_idx` (`blogID`),
-  CONSTRAINT `tag_blogID` FOREIGN KEY (`blogID`) REFERENCES `blog` (`blogID`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`tagID`),
+  UNIQUE KEY `tagID_UNIQUE` (`tagID`)
+);
+
+CREATE TABLE `tag_blog` (
+  `blogID` int NOT NULL,
+  `tagID` int NOT NULL,
+  KEY `tag_glog_tagID_idx` (`tagID`),
+  KEY `tag_blog_blogID` (`blogID`),
+  CONSTRAINT `tag_blog_blogID` FOREIGN KEY (`blogID`) REFERENCES `blog` (`blogID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tag_glog_tagID` FOREIGN KEY (`tagID`) REFERENCES `tag` (`tagID`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE `comment` (
@@ -46,7 +57,7 @@ CREATE TABLE `comment` (
   UNIQUE KEY `commentID_UNIQUE` (`commentID`),
   KEY `user_username_idx` (`username`),
   KEY `comment_blogID_idx` (`blogID`),
-  CONSTRAINT `comment_blogID` FOREIGN KEY (`blogID`) REFERENCES `blog` (`blogID`),
+  CONSTRAINT `comment_blogID` FOREIGN KEY (`blogID`) REFERENCES `blog` (`blogID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `comment_username` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -59,12 +70,14 @@ CREATE TABLE `follow` (
   CONSTRAINT `follow_username_following` FOREIGN KEY (`following`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+
 CREATE TABLE `hobby` (
   `username` varchar(45) NOT NULL,
   `hobby` varchar(45) NOT NULL,
   KEY `hobbie_username_idx` (`username`),
-  CONSTRAINT `hobby_username` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
+  CONSTRAINT `hobby_username` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 
 
 
@@ -94,11 +107,18 @@ INSERT INTO `comment` (`commentID`, `username`, `description`, `sentiment`, `c_d
 INSERT INTO `comment` (`commentID`, `username`, `description`, `sentiment`, `c_date`, `blogID`) VALUES ('8', 'admin', 'I own you (◣_◢)', 'Negative', '05-01-22', '6');
 INSERT INTO `comment` (`commentID`, `username`, `description`, `sentiment`, `c_date`, `blogID`) VALUES ('9', 'admin', 'you cant', 'Negative', '05-01-22', '5');
 
-INSERT INTO `tag` (`blogID`, `tag`) VALUES ('1', 'uchiha');
-INSERT INTO `tag` (`blogID`, `tag`) VALUES ('2', 'hello');
-INSERT INTO `tag` (`blogID`, `tag`) VALUES ('3', 'justaway');
-INSERT INTO `tag` (`blogID`, `tag`) VALUES ('4', 'gorilla');
-INSERT INTO `tag` (`blogID`, `tag`) VALUES ('5', 'getmeout');
+INSERT INTO `tag` (`tagID`, `tag`) VALUES ('1', 'uchiha');
+INSERT INTO `tag` (`tagID`, `tag`) VALUES ('2', 'hello');
+INSERT INTO `tag` (`tagID`, `tag`) VALUES ('3', 'justaway');
+INSERT INTO `tag` (`tagID`, `tag`) VALUES ('4', 'gorilla');
+INSERT INTO `tag` (`tagID`, `tag`) VALUES ('5', 'getmeout');
+
+INSERT INTO `tag_blog` (`blogID`, `tagID`) VALUES ('1', '2');
+INSERT INTO `tag_blog` (`blogID`, `tagID`) VALUES ('1', '1');
+INSERT INTO `tag_blog` (`blogID`, `tagID`) VALUES ('2', '2');
+INSERT INTO `tag_blog` (`blogID`, `tagID`) VALUES ('3', '3');
+INSERT INTO `tag_blog` (`blogID`, `tagID`) VALUES ('4', '4');
+INSERT INTO `tag_blog` (`blogID`, `tagID`) VALUES ('5', '5');
 
 INSERT INTO `follow` (`username`, `following`) VALUES ('justaway', 'horse');
 INSERT INTO `follow` (`username`, `following`) VALUES ('sasuke69', 'justaway');
