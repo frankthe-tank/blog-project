@@ -6,7 +6,7 @@
         <nav class="display">
             <a href="loggedin.php" class="navhead">Home</a>
             <a href="newPost.php" class="navhead">Make A Post!</a>
-            <a href="functions.php" class="navhead">Part 3</a>
+            <a href="functions.php" class="navhead">ADMIN ONLY</a>
             <a href="index.php" class="navhead">Logout</a>
         </nav>   
     </head> 

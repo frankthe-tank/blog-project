@@ -1,3 +1,16 @@
+<?php
+
+    session_start();
+    $username=$_SESSION['username'];
+
+    if($username!='admin')
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('You do not have permission to access this page');
+    window.location.href='loggedin.php';
+    </script>");
+
+?>
+
 <html>
     <head>  
         <title>New Post</title>  
@@ -73,6 +86,48 @@
                 echo "</table>";
                 
             }
+             //if followed by 2 is clicked
+             if(isset($_POST['searchFollow'])){
+                $host = "127.0.0.1:3308";  
+                $user = "user";  
+                $password = "pass";  
+                $db_name = "comp440project";  
+     
+                $con = mysqli_connect($host, $user, $password, $db_name);  
+                if(mysqli_connect_errno()) {  
+                    die("Failed to connect with MySQL: ". mysqli_connect_error());  
+                } 
+                $user1 = $_POST['user1'];  
+                $user2 = $_POST['user2'];
+      
+                $sql="select p1.followers as theyfollow from(
+                    select username, group_concat(following order by following) as followers
+                    from follow
+                    where username='".$user1."'
+                )p1
+                join
+                  (
+                    select username, group_concat(following order by following) as followers
+                    from follow
+                    where username='".$user2."'
+                    
+                  ) p2 on  p2.followers = p1.followers;";
+                $result = mysqli_query($con, $sql);
+                echo "<table style='margin-left: auto;
+                margin-right: auto;'>
+                <tr>
+                    <td><b>Users followed by: ".$user1." AND ".$user2."</b></td>
+                    
+                </tr>";
+                while($row = mysqli_fetch_array($result))
+                {
+                    echo "<tr>";
+                    echo "<td>" . $row['theyfollow'] . "</td>";
+                    
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
             else if(isset($_POST['neverComment'])){
                 echo "<table style='width:100%'>
                 <tr>
@@ -94,27 +149,48 @@
             </p>  
         </form>
 
-
-</div>
+    </div>
+    </div>
     <div id='frm'>
-        <p><b>Search for people followed by these two users!</b></p>  
-        <form name="f1" action = "newPost.php" onsubmit = "return validation()" method = "POST">  
+        <p><b>Search for users who posted two blogs with selected tags!</b></p>  
+        <form method = "POST">  
             <p>  
                 <label> User 1: </label>  
-                <input type = "text" id ="Subject" name  = "Subject" required/>  
+                <input type = "text" id ="tag1" name  = "tag1" required/>  
             </p>    
             <p>  
                 <label> User 2: </label>  
-                <input type = "text" id ="Tags" name  = "Tags" required />  
+                <input type = "text" id ="tag2" name  = "tag2" required />  
             </p>
 
 
             <p>     
-                <input type =  "submit" id = "btn" name= create value = "VIEW" />  
+                <input type =  "submit" id = "btn" name= "twotags" value = "VIEW" />  
             </p>  
         </form>
         
     </div>
+
+    <div id='frm'>
+        <p><b>Search for people followed by these two users!</b></p>  
+        <form method = "POST">  
+            <p>  
+                <label> User 1: </label>  
+                <input type = "text" id ="user1" name  = "user1" required/>  
+            </p>    
+            <p>  
+                <label> User 2: </label>  
+                <input type = "text" id ="user2" name  = "user2" required />  
+            </p>
+
+
+            <p>     
+                <input type =  "submit" id = "btn" name= "searchFollow" value = "VIEW" />  
+            </p>  
+        </form>
+        
+    </div>
+   
     
     </div>
     <script>  
