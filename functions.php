@@ -100,18 +100,18 @@
                 $user1 = $_POST['user1'];  
                 $user2 = $_POST['user2'];
       
-                $sql="select p1.followers as theyfollow from(
-                    select username, group_concat(following order by following) as followers
+                $sql="select p1.following as theyfollow from(
+                    select username,  following
                     from follow
                     where username='".$user1."'
                 )p1
                 join
                   (
-                    select username, group_concat(following order by following) as followers
+                    select username, following
                     from follow
                     where username='".$user2."'
                     
-                  ) p2 on  p2.followers = p1.followers;";
+                  ) p2 on  p2.following = p1.following;";
                 $result = mysqli_query($con, $sql);
                 echo "<table style='margin-left: auto;
                 margin-right: auto;'>
