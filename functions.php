@@ -29,7 +29,6 @@
     <div id = "frm">  
         <form method="post">
         <h1>Choose option</h1>  
-        <input type="submit" name="atLestTwo" class="btn" value="At least two blogs!"/>
         <input type="submit" name="mostBlog" class="btn" value="Users with most blogs on 5/1/22!"/>
         <!--example hobby pairs-->
         <input type="submit" name="sharedHobby" value="Shared Hobby" class="btn" />
@@ -40,8 +39,9 @@
 
         </form>
     </div> 
+    
     <?php 
-            
+    //tables will be displayed here        
             //if shared hobby is clicked
             if(isset($_POST['sharedHobby'])){
                 $host = "127.0.0.1:3308";  
