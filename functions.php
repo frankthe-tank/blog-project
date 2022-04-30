@@ -32,8 +32,8 @@
         <input type="submit" name="mostBlog" class="btn" value="Users with most blogs on 5/1/22!"/>
         <!--example hobby pairs-->
         <input type="submit" name="sharedHobby" value="Shared Hobby" class="btn" />
-        <input type="submit" name="neverComment" value="Never Commented!" class="btn"/>
         <input type="submit" name="neverPosted" class="btn" value="Never posted a blog!"/>
+        <input type="submit" name="neverComment" value="Never Commented!" class="btn"/>
         <input type="submit" name="onlyNegative" class="btn" value="Users only comment negative!"/>
         <input type="submit" name="noNegative" class="btn" value="Users with only positive!"/>
 
@@ -42,18 +42,18 @@
     
     <?php 
     //tables will be displayed here        
+            $host = "127.0.0.1:3308";  
+            $user = "user";  
+            $password = "pass";  
+            $db_name = "comp440project";  
+     
+            $con = mysqli_connect($host, $user, $password, $db_name);  
+            if(mysqli_connect_errno()) {  
+                die("Failed to connect with MySQL: ". mysqli_connect_error());  
+            }
+            
             //if shared hobby is clicked
             if(isset($_POST['sharedHobby'])){
-                $host = "127.0.0.1:3308";  
-                $user = "user";  
-                $password = "pass";  
-                $db_name = "comp440project";  
-     
-                $con = mysqli_connect($host, $user, $password, $db_name);  
-                if(mysqli_connect_errno()) {  
-                    die("Failed to connect with MySQL: ". mysqli_connect_error());  
-                } 
-
                 $sql="select p1.username as person1, p2.username as person2, p1.hobbies as hobby
                 from
                 (
@@ -87,16 +87,7 @@
                 
             }
              //if followed by 2 is clicked
-             if(isset($_POST['searchFollow'])){
-                $host = "127.0.0.1:3308";  
-                $user = "user";  
-                $password = "pass";  
-                $db_name = "comp440project";  
-     
-                $con = mysqli_connect($host, $user, $password, $db_name);  
-                if(mysqli_connect_errno()) {  
-                    die("Failed to connect with MySQL: ". mysqli_connect_error());  
-                } 
+            else if(isset($_POST['searchFollow'])){
                 $user1 = $_POST['user1'];  
                 $user2 = $_POST['user2'];
       
@@ -123,17 +114,87 @@
                 {
                     echo "<tr>";
                     echo "<td>" . $row['theyfollow'] . "</td>";
-                    
                     echo "</tr>";
                 }
                 echo "</table>";
             }
-            else if(isset($_POST['neverComment'])){
-                echo "<table style='width:100%'>
+            //if never posted a blog
+            else if(isset($_POST['neverPosted'])){
+                $sql = "select username as neverPosted
+                        from user
+                        where username not in (select distinct username from blog);";
+                $result = mysqli_query($con, $sql);
+                echo "<table style='margin-left: auto; margin-right: auto;'>
                 <tr>
-                    <td>user</td>
+                    <td><b>user</b></td>
                     
-                </tr></table>";
+                </tr>";
+                while($row = mysqli_fetch_array($result))
+                {
+                    echo "<tr>";
+                    echo "<td>" . $row['neverPosted'] . "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+            //if never commented
+            else if(isset($_POST['neverComment'])){
+                $sql = "select username as neverComment 
+                        from user
+                        where username not in (select distinct username from comment);";
+                $result = mysqli_query($con, $sql);
+                echo "<table style='margin-left: auto; margin-right: auto;'>
+                <tr>
+                    <td><b>user</b></td>
+                    
+                </tr>";
+                while($row = mysqli_fetch_array($result))
+                {
+                    echo "<tr>";
+                    echo "<td>" . $row['neverComment'] . "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+            else if(isset($_POST['onlyNegative'])){
+                $sql = "select distinct username as onlyNegative
+                        from comment
+                        where sentiment = 'Negative' and username not in (select distinct username 
+                                                                          from comment 
+                                                                          where sentiment = 'Positive');";
+                $result = mysqli_query($con, $sql);
+                echo "<table style='margin-left: auto; margin-right: auto;'>
+                <tr>
+                    <td><b>user</b></td>
+                    
+                </tr>";
+                while($row = mysqli_fetch_array($result))
+                {
+                    echo "<tr>";
+                    echo "<td>" . $row['onlyNegative'] . "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+            else if(isset($_POST['noNegative'])){
+                $sql = "select username as noNegative
+                        from blog
+                        where blogID not in (select blogID
+                                             from comment
+                                             where sentiment = 'Negative');";
+                $result = mysqli_query($con, $sql);
+                echo "<table style='margin-left: auto; margin-right: auto;'>
+                <tr>
+                    <td><b>user</b></td>
+                    
+                </tr>";
+                while($row = mysqli_fetch_array($result))
+                {
+                    echo "<tr>";
+                    echo "<td>" . $row['noNegative'] . "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
             }
         ?> 
 
