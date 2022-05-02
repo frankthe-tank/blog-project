@@ -61,8 +61,7 @@
             <p>     
                 <input type =  "submit" id = "btn" name= create value = "Register" />  
             </p>  
-        </form>
-        <script type="text/javascript">;</script>  
+        </form> 
     </div>  
     <div>
         <?php
@@ -106,8 +105,8 @@
                                 $hobbysql = 
                                 "INSERT INTO hobby (username, hobby)
                                 VALUES('$username','".$selected."')";
-                               if($con->query($hobbysql) === TRUE){
-                                
+                               if($con->query($hobbysql) ===TRUE){
+                         
                                }
                                else{echo ("<script LANGUAGE='JavaScript'>
                                 window.alert('Could not insert hobbies!');
