@@ -1,44 +1,56 @@
 html{
-	background: #274472; /* Beccapurple */
+	background: linear-gradient(#C55F15,#422F13,#553F1D); 
   margin: 0;
   padding:0;
+  height:100%;
+  background-attachment: fixed;
   box-sizing:border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 * {
   box-sizing: border-box;
 }
+p,h1,h2,h3,h4,h5{
+  font-family: Arial, Helvetica, sans-serif;
+  color:#fff;
+}
 .navhead{
-    background: #3D77E3;
-    color: #000000;
+    background: #C55F15;
+    color: #FFF;
     text-decoration: none;
   }
+  label{
+    color:#fff;
+  }
 body{   
-    background: rgb(221, 68, 68);  
+  background: linear-gradient(#000000,#393939);
+ 
+  background-attachment: fixed;
 }  
 #frm{  
-    border: solid rgb(235, 14, 14) 1px;  
+   
     width:50%;  
     border-radius: 2px;  
     margin: 120px auto;  
-    background: white;  
     padding: 50px;  
 }  
 #btn{  
     color: #fff;  
-    background: #337ab7;  
+    background: #C55F15;  
     padding: 7px;  
     margin-left: 70%;  
+    border-radius: 8px;
 } 
 .btn{
     color: #fff;  
-    background: #337ab7;  
+    background: #C55F15;  
     padding: 7px;  
     width:100%;
-    
+    border-radius: 8px;
 }
 .display {
     text-align: center;
-     font-family: "Roboto mono", serif;
+    font-family: Arial, Helvetica, sans-serif;
     overflow: hidden;
     /* To reduce the space between the elements set the font size to zero in the parent element. */
     position: fixed;
@@ -67,19 +79,22 @@ body{
     height:50px;
   }
   .card {
-    background-color: rgb(69, 76, 175);
+    border-top: 3px solid #C55F15;
     padding: 20px;
     margin-top: 20px;
+    
  }
  .Comment-header{
-   background-color: rgb(233, 207, 207);
+   
    padding:15px;
 }
 .comment{
-  background-color: rgb(158, 175, 211);
+  font-family: Arial, Helvetica, sans-serif;
+  border-top: 1px solid #fff;
   padding: 15px;
 }
 table, th, td {
-  border:1px solid black;
+  border:1px solid #C55F15;
+  color: #fff;
   
 }

@@ -30,11 +30,39 @@
                 <input type = "Email" id ="email" name  = "email" required />  
             </p>
 
+            <p>
+               <label> Select from hobbies:<br></label>
+                <input type="checkbox"  id="cooking" name="hobby[]" value="cooking">
+                <label for="cooking"> Cooking</label><br>
+                
+                <input type="checkbox"  id="eating" name="hobby[]" value="eating">
+                <label for="eating"> Eating</label><br>
+                
+                <input type="checkbox" id="stalking" name="hobby[]" value="stalking">
+                <label for="stalking"> Stalking</label>
 
+                <input type="checkbox" id="reading" name="hobby[]" value="reading">
+                <label for="reading"> Reading</label>
+                
+                <input type="checkbox" id="sports" name="hobby[]" value="sports">
+                <label for="sports"> Sports</label>
+
+                <input type="checkbox" id="tech" name="hobby[]" value="tech">
+                <label for="tech"> Technology</label>
+
+                <input type="checkbox" id="movies" name="hobby[]" value="movies">
+                <label for="movies"> Movies</label>
+
+                <input type="checkbox"  id="anime" name="hobby[]" value="anime">
+                <label for="anime"> Anime</label>
+                
+            </p>
+       
             <p>     
                 <input type =  "submit" id = "btn" name= create value = "Register" />  
             </p>  
-        </form>  
+        </form>
+        <script type="text/javascript">;</script>  
     </div>  
     <div>
         <?php
@@ -70,7 +98,24 @@
                 if($count==0){
                     $sql = "INSERT INTO user (username, password, firstName, lastName, email)
                             VALUES ('$username', '$password', '$fName','$lName','$email')";
+                    
+                    
                     if ($con->query($sql) === TRUE) {
+                        if(!empty($_POST['hobby'])){
+                            foreach($_POST['hobby'] as $selected) {
+                                $hobbysql = 
+                                "INSERT INTO hobby (username, hobby)
+                                VALUES('$username','".$selected."')";
+                               if($con->query($hobbysql) === TRUE){
+                                
+                               }
+                               else{echo ("<script LANGUAGE='JavaScript'>
+                                window.alert('Could not insert hobbies!');
+                               window.location.href='index.php';
+                               </script>");}
+                            }
+                        
+                        }
                         echo ("<script LANGUAGE='JavaScript'>
                          window.alert('User Created!');
                         window.location.href='index.php';
@@ -79,6 +124,7 @@
                       else {
                         echo "Error: " . $sql . "<br>" . $con->error;
                       }
+                      
                 }
                 else{
                     echo ("<script LANGUAGE='JavaScript'>
