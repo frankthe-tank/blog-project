@@ -25,12 +25,24 @@
         $db_name = "comp440project";  
 
         $con = mysqli_connect($host, $user, $password, $db_name); 
-        
 
         $sql="SELECT * FROM blog ORDER BY blogID DESC";
         $result = mysqli_query($con, $sql); 
         
         
+
+        if(isset($_POST['Follow'])) { 
+			$followuser=str_replace('/','',$_POST['usertofollow']);
+            
+            $followsql="INSERT INTO follow (username, following)
+            VALUES('$username','$followuser')";
+            $followres=mysqli_query($con,$followsql);
+            if($followres){
+                
+            }
+
+            echo("$followuser"); 
+		}
 
         echo "<br>";
         echo "<table border='1'>";
@@ -53,7 +65,8 @@
             
 
            echo("<div class='card'>");
-           echo("<h2>".$row['subject']."</h2>
+           echo("<form method='post'><input type='hidden'  name='usertofollow' value=".$row['username']."/><input type='submit'class= 'follow-button' name='Follow' value='Follow: ".$row['username']."'>
+           </form><h2>".$row['subject']."</h2>
                 <h3>By User: ".$row['username']."</h3>
                 <h5>Created on: ".$row['p_date']."</h5>
                 <p>".$row['description']."</p><p><b>TAGS: </b>");

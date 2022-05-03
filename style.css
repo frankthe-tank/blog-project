@@ -98,3 +98,12 @@ table, th, td {
   color: #fff;
   
 }
+.follow-button{
+
+  float: right;
+  color: #fff;  
+    background: #C55F15;  
+    padding: 7px;  
+    width:15%;
+    border-radius: 8px;
+}
