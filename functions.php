@@ -177,11 +177,11 @@
                 echo "</table>";
             }
             else if(isset($_POST['noNegative'])){
-                $sql = "select username as noNegative
+                $sql = "select distinct username as noNegative
                         from blog
-                        where blogID not in (select blogID
-                                             from comment
-                                             where sentiment = 'Negative');";
+                        where username not in (select distinct B.username
+                                               from blog as B, comment as C
+                                               where B.blogID = C.blogID and sentiment = 'Negative');";
                 $result = mysqli_query($con, $sql);
                 echo "<table style='margin-left: auto; margin-right: auto;'>
                 <tr>
