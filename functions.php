@@ -307,11 +307,11 @@
         <p><b>Search for users who posted two blogs with selected tags!</b></p>  
         <form method = "POST">  
             <p>  
-                <label> User 1: </label>  
+                <label> Tag 1: </label>  
                 <input type = "text" id ="tag1" name  = "tag1" required/>  
             </p>    
             <p>  
-                <label> User 2: </label>  
+                <label> Tag 2: </label>  
                 <input type = "text" id ="tag2" name  = "tag2" required />  
             </p>
 
