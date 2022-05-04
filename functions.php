@@ -57,15 +57,13 @@
                 $sql="select p1.username as person1, p2.username as person2, p1.hobbies as hobby
                 from
                 (
-                  select username, group_concat(hobby order by hobby) as hobbies
+                  select username,  hobby as hobbies
                   from hobby
-                  group by username
                 ) p1
                 join
                 (
-                  select username, group_concat(hobby order by hobby) as hobbies
+                  select username,  hobby as hobbies 
                   from hobby
-                  group by username
                 ) p2 on p2.username > p1.username and p2.hobbies = p1.hobbies
                 order by person1, person2;";
                 $result = mysqli_query($con, $sql);
