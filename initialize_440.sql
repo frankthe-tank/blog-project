@@ -89,7 +89,7 @@ INSERT INTO `user` (`username`, `password`, `firstName`, `lastName`, `email`) VA
 INSERT INTO `user` (`username`, `password`, `firstName`, `lastName`, `email`) VALUES ('fruits_punch_samurai', 'comp440', 'katsura', 'kotarou', 'zura@gmail.com');
 INSERT INTO `user` (`username`, `password`, `firstName`, `lastName`, `email`) VALUES ('admin', 'fsjcomp440', 'frank', 'ceja', 'admin@gmail.com');
 
-INSERT INTO `blog` (`blogID`, `username`, `subject`, `description`, `p_date`) VALUES ('1', 'sasuke69', 'The day I killed my brother', 'Long story short, I killed him...', '04-16-22');
+INSERT INTO `blog` (`blogID`, `username`, `subject`, `description`, `p_date`) VALUES ('1', 'sasuke69', 'Lack of foundation', 'I will sustain the objection. Next question...', '04-16-22');
 INSERT INTO `blog` (`blogID`, `username`, `subject`, `description`, `p_date`) VALUES ('2', 'horse', 'Hello World', 'Hello friends', '04-12-22');
 INSERT INTO `blog` (`blogID`, `username`, `subject`, `description`, `p_date`) VALUES ('3', 'justaway', 'I may explode', 'I am actually a bomb', '04-13-22');
 INSERT INTO `blog` (`blogID`, `username`, `subject`, `description`, `p_date`) VALUES ('4', 'fruits_chinpo_samurai', 'why do people think I am a gorilla?', 'I am actually a gorilla', '04-12-22');
@@ -98,7 +98,7 @@ INSERT INTO `blog` (`blogID`, `username`, `subject`, `description`, `p_date`) VA
 INSERT INTO `blog` (`blogID`, `username`, `subject`, `description`, `p_date`) VALUES ('7', 'thejtcooper', 'I wont lose to horse', 'I will post the most number of blogs', '05-04-22');
 INSERT INTO `blog` (`blogID`, `username`, `subject`, `description`, `p_date`) VALUES ('8', 'horse', 'What is the meaning of life?', 'We only live once', '05-04-22');
 INSERT INTO `blog` (`blogID`, `username`, `subject`, `description`, `p_date`) VALUES ('9', 'horse', 'Run like the wind', 'I am speed', '05-04-22');
-INSERT INTO `blog` (`blogID`, `username`, `subject`, `description`, `p_date`) VALUES ('10', 'thejtcooper', 'It is never too late', 'We are even now', '05-04-22');
+INSERT INTO `blog` (`blogID`, `username`, `subject`, `description`, `p_date`) VALUES ('10', 'thejtcooper', 'Objection Hearsay 🤡', 'I have no idea what Im doing 🤡', '05-04-22');
 
 INSERT INTO `comment` (`commentID`, `username`, `description`, `sentiment`, `c_date`, `blogID`) VALUES ('1', 'justaway', 'hello', 'Positive', '04-16-22', '1');
 INSERT INTO `comment` (`commentID`, `username`, `description`, `sentiment`, `c_date`, `blogID`) VALUES ('2', 'horse', 'hello', 'Positive', '04-16-22', '4');
@@ -107,7 +107,7 @@ INSERT INTO `comment` (`commentID`, `username`, `description`, `sentiment`, `c_d
 INSERT INTO `comment` (`commentID`, `username`, `description`, `sentiment`, `c_date`, `blogID`) VALUES ('5', 'thejtcooper', 'This place sucks!', 'Negative', '05-04-22', '5');
 INSERT INTO `comment` (`commentID`, `username`, `description`, `sentiment`, `c_date`, `blogID`) VALUES ('6', 'sasuke69', 'You should contact the admin', 'Positive', '05-04-22', '5');
 INSERT INTO `comment` (`commentID`, `username`, `description`, `sentiment`, `c_date`, `blogID`) VALUES ('7', 'fruits_punch_samurai', 'Hello fellow patriot!', 'Positive', '04-16-22', '2');
-INSERT INTO `comment` (`commentID`, `username`, `description`, `sentiment`, `c_date`, `blogID`) VALUES ('8', 'admin', 'I own you (◣_◢)', 'Negative', '05-03-22', '6');
+INSERT INTO `comment` (`commentID`, `username`, `description`, `sentiment`, `c_date`, `blogID`) VALUES ('8', 'admin', 'I own you 😈', 'Negative', '05-03-22', '6');
 INSERT INTO `comment` (`commentID`, `username`, `description`, `sentiment`, `c_date`, `blogID`) VALUES ('9', 'admin', 'you cant', 'Negative', '05-03-22', '5');
 
 INSERT INTO `tag` (`tagID`, `tag`) VALUES ('1', 'uchiha');
@@ -118,7 +118,7 @@ INSERT INTO `tag` (`tagID`, `tag`) VALUES ('5', 'getmeout');
 INSERT INTO `tag` (`tagID`, `tag`) VALUES ('6', 'goals');
 INSERT INTO `tag` (`tagID`, `tag`) VALUES ('7', 'winner');
 INSERT INTO `tag` (`tagID`, `tag`) VALUES ('8', 'lifechoices');
-INSERT INTO `tag` (`tagID`, `tag`) VALUES ('9', 'nevertoolate');
+INSERT INTO `tag` (`tagID`, `tag`) VALUES ('9', 'clown');
 
 INSERT INTO `tag_blog` (`blogID`, `tagID`) VALUES ('1', '2');
 INSERT INTO `tag_blog` (`blogID`, `tagID`) VALUES ('1', '1');
@@ -138,6 +138,13 @@ INSERT INTO `follow` (`username`, `following`) VALUES ('sasuke69', 'justaway');
 INSERT INTO `follow` (`username`, `following`) VALUES ('horse', 'sasuke69');
 INSERT INTO `follow` (`username`, `following`) VALUES ('fruits_chinpo_samurai', 'sasuke69');
 INSERT INTO `follow` (`username`, `following`) VALUES ('justaway', 'thejtcooper');
+INSERT INTO `follow` (`username`, `following`) VALUES ('horse', 'justaway');
+INSERT INTO `follow` (`username`, `following`) VALUES ('horse', 'thejtcooper');
+INSERT INTO `follow` (`username`, `following`) VALUES ('thejtcooper', 'admin');
+INSERT INTO `follow` (`username`, `following`) VALUES ('admin', 'horse');
+INSERT INTO `follow` (`username`, `following`) VALUES ('justaway', 'admin');
+INSERT INTO `follow` (`username`, `following`) VALUES ('justaway', 'sasuke69');
+INSERT INTO `follow` (`username`, `following`) VALUES ('horse', 'admin');
 
 INSERT INTO `hobby` (`username`, `hobby`) VALUES ('justaway', 'cooking');
 INSERT INTO `hobby` (`username`, `hobby`) VALUES ('sasuke69', 'eating');
