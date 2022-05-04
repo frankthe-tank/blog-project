@@ -198,16 +198,19 @@
                 $tag1 = $_POST['tag1'];  
                 $tag2 = $_POST['tag2'];
       
-                $sql="SELECT username
-                FROM blog
-                WHERE blogID IN (SELECT blogID
-                            FROM tag
-                            WHERE tag = '".$tag1."')
-                AND blogID IN (SELECT blogID
-                            FROM tag
-                            WHERE tag = '".$tag2."')
-                GROUP BY username
-                HAVING COUNT(username) >= 2;";
+                $sql="select distinct X.username
+                from (select *
+                      from blog
+                      where blogID in (select blogID
+                                       from tag_blog
+                                       where tagID = (select tagID from tag as t where t.tag = '".$tag1."'))) as X
+                join
+                (select *
+                 from blog
+                 where blogID in (select blogID
+                                  from tag_blog
+                                  where tagID = (select tagID from tag as t where t.tag = '".$tag2."'))) as Y
+                where X.blogID <> Y.blogID and X.username = Y.username;";
                 $result = mysqli_query($con, $sql);
                 echo "<table style='margin-left: auto;
                 margin-right: auto;'>
