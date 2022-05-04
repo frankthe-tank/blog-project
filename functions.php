@@ -29,7 +29,7 @@
     <div id = "frm">  
         <form method="post">
         <h1>Choose option</h1>  
-        <input type="submit" name="mostBlog" class="btn" value="Users with most blogs on 5/1/22!"/>
+        <input type="submit" name="mostBlog" class="btn" value="Users with most blogs on 5/4/22!"/>
         <!--example hobby pairs-->
         <input type="submit" name="sharedHobby" value="Shared Hobby" class="btn" />
         <input type="submit" name="neverPosted" class="btn" value="Never posted a blog!"/>
@@ -196,10 +196,100 @@
                 }
                 echo "</table>";
             }
+            else if(isset($_POST['twotags'])){ 
+                $tag1 = $_POST['tag1'];  
+                $tag2 = $_POST['tag2'];
+      
+                $sql="SELECT username
+                FROM blog
+                WHERE blogID IN (SELECT blogID
+                            FROM tag
+                            WHERE tag = '".$tag1."')
+                AND blogID IN (SELECT blogID
+                            FROM tag
+                            WHERE tag = '".$tag2."')
+                GROUP BY username
+                HAVING COUNT(username) >= 2;";
+                $result = mysqli_query($con, $sql);
+                echo "<table style='margin-left: auto;
+                margin-right: auto;'>
+                <tr>
+                    <td><b>Users who posted with tags: ".$tag1." AND ".$tag2."</b></td>
+                    
+                </tr>";
+                while($row = mysqli_fetch_array($result))
+                {
+                    echo "<tr>";
+                    echo "<td>" . $row['username'] . "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+            else if(isset($_POST['mostBlog'])){
+                $sql="SELECT username
+                FROM blog
+                WHERE p_date = '05-04-22'
+                GROUP BY username
+                HAVING COUNT(username) = (SELECT MAX(largest) as highest
+                                        FROM (SELECT COUNT(username) AS largest
+                                            FROM blog
+                                            WHERE p_date = '05-04-22'
+                                            GROUP BY username) 
+                                            AS table1);";
+                $result = mysqli_query($con, $sql);
+                echo "<table style='margin-left: auto;
+                margin-right: auto;'>
+                <tr>
+                    <td><b>Here are the users with the most blogs on 5/4/22</b></td>
+                    
+                </tr>";
+                while($row = mysqli_fetch_array($result))
+                {
+                    echo "<tr>";
+                    echo "<td>" . $row['username'] . "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+
+            }
+            else if(isset($_POST['create'])){ 
+                $username = $_POST['Subject'];  
+                
+      
+                $sql="SELECT *
+                FROM comp440project.blog
+                WHERE username = '".$username."' AND blogID IN (SELECT blogID
+                                                        FROM comp440project.comment)
+                                                        AND blogID NOT IN (SELECT blogID
+                                                                        FROM comp440project.comment
+                                                                        WHERE sentiment = 'Negative');";
+                $result = mysqli_query($con, $sql);
+                echo "<table style='margin-left: auto;
+                margin-right: auto;'>
+                <tr>
+                    <td><b>Blog ID </b></td>
+                    <td><b>".$username." </b></td>
+                    <td><b>Subject </b></td>
+                    <td><b>Description </b></td>
+                    <td><b>Date </b></td>
+                    
+                </tr>";
+                while($row = mysqli_fetch_array($result))
+                {
+                    echo "<tr>";
+                    echo "<td>" . $row['blogID'] . "</td>";
+                    echo "<td>" . $row['username'] . "</td>";
+                    echo "<td>" . $row['subject'] . "</td>";
+                    echo "<td>" . $row['description'] . "</td>";
+                    echo "<td>" . $row['p_date'] . "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
         ?> 
 
     <div id='frm'>
-    <p><b> blogs by user who has received no negative reviews!</b></p>  
+    <p><b> Search blogs by user who has received only positive reviews!</b></p>  
         <form name="" action = "" onsubmit = "" method = "POST">  
             <p>  
                 <label> Enter user's name: </label>  
